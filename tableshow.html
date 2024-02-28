@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafetyNet Builder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body
+    style="background-image: url('a_guide_to_digital_safety_management_system_fc062626ba.png');background-size: cover;background-position: center;background-repeat: no-repeat;">
+    <div class="navbar">
+        <!-- Logo and text -->
+        <a href="index.html" class="navbar-logo">
+            <img src="Picture1.jpg" alt="Logo">
+        </a>
+
+        <!-- Search bar -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search...">
+            <button class="search-button" onclick="handleSearch()">Search</button>
+        </div>
+    </div>
+
+
+
+    <main>
+
+        <section class="intro">
+            <h1 id="tablehead" style="display: none;">Showing All Construction Safety Risks and Mitigation Techniques
+            </h1>
+            <div id="tableContainer" style="margin-left: 50px;margin-right: 50px;margin-top: 50px;"></div>
+        </section>
+    </main>
+
+
+    <div id="loading-screen">
+        <p>Loading...</p>
+    </div>
+    <script type="module">
+        let tableName;
+        let dataRef;
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const params = new URLSearchParams(window.location.search);
+            tableName = params.get('tableName');
+            dataRef = params.get('dataRef');
+
+            show_table();
+        });
+
+
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getDatabase, ref, child, onValue, get, remove, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getStorage, ref as storageRef, getDownloadURL, deleteObject, uploadBytes } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsyys0dxq7SSNxbzQ19HqjGBUdaWgfpUM",
+            authDomain: "siteriskdatabase.firebaseapp.com",
+            databaseURL: "https://siteriskdatabase-default-rtdb.firebaseio.com",
+            projectId: "siteriskdatabase",
+            storageBucket: "siteriskdatabase.appspot.com",
+            messagingSenderId: "292672879363",
+            appId: "1:292672879363:web:8fff66c20f33e2741d0736",
+            measurementId: "G-L2NFTX5RTD"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const storage = getStorage(app);
+        const db = getDatabase();
+        function populateTable(tableId, tableName, hazardData) {
+            const tableContainer = document.getElementById('tableContainer');
+            const table = document.createElement('table');
+            table.id = tableId;
+            const tableHeader = document.createElement('thead');
+            const tableBody = document.createElement('tbody');
+            table.appendChild(tableHeader);
+            table.appendChild(tableBody);
+
+            // Create table header with main node name as heading
+            const headerRow = document.createElement('tr');
+            const headerCell = document.createElement('th');
+            headerCell.textContent = tableName;
+            headerCell.colSpan = 10; // Set colspan to cover all columns
+            headerCell.style.backgroundColor = '#C5E0B3'; // Set background color
+            headerCell.style.fontSize = '20px';
+            headerRow.appendChild(headerCell);
+            tableHeader.appendChild(headerRow);
+            // Create table headers
+            const headerRow2 = document.createElement('tr');
+            headerRow2.innerHTML = `
+                <th>Hazards</th>
+                <th>Consequences</th>
+                <th>Description</th>
+                <th>Likelihood</th>
+                <th>Severity</th>
+                <th>Measured Risk</th>
+                <th>Risk Rank</th>
+                <th>Risk Response</th>
+                <th>Mitigation Technique</th>
+                <th>Risk Id</th>
+            `;
+            tableHeader.appendChild(headerRow2);
+
+            tableContainer.appendChild(table);
+
+            // Populate table body with hazard data
+            for (const [hazardName, hazardDetails] of Object.entries(hazardData)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${hazardName}</td>
+                    <td>${hazardDetails.consequences}</td>
+                    <td><a href="${hazardDetails.Description}" target="_blank">Desciption</a></td>
+                    <td>${hazardDetails.likelihood}</td>
+                    <td>${hazardDetails.severity}</td>
+                    <td>${hazardDetails.Measured_Risk}</td>
+                    <td>${hazardDetails.Risk_Rank}</td>
+                    <td><a href="${hazardDetails.Risk_Response}" target="_blank">Comments</a></td>
+                    <td><a href="${hazardDetails.mitigation_technique}" target="_blank">Mitigation Technique</a></td>
+                    <td>${hazardDetails.riskId}</td>
+                `;
+                tableBody.appendChild(row);
+            }
+
+        }
+        function show_table() {
+            document.getElementById('loading-screen').style.display = 'block';
+            if (dataRef == 'all') {
+                document.getElementById('tablehead').style.display = 'block';
+                const tables = [
+                    { tableName: 'Task01: Excavation', dataRef: 'Excavation' },
+                    { tableName: 'Task02: Reinforcement and Steel Erection', dataRef: 'Reinforcement_Erection' },
+                    { tableName: 'Task03: Concrete Mixing', dataRef: 'Concrete_mixing' },
+                    { tableName: 'Task04: Formwork and Shuttering', dataRef: 'Formwork_and_Shuttering' },
+                    { tableName: 'Task05: Hotwork:', dataRef: 'Hotwork' },
+                    { tableName: 'Task06: Concreting', dataRef: 'Concreting' },
+                    { tableName: 'Task07: Hoist', dataRef: 'Hoist' },
+                    { tableName: 'Task08: Drilling', dataRef: 'Drilling' },
+                    { tableName: 'Task09: Scaffold/Ladder', dataRef: 'Scaffold_Ladder' },
+                    { tableName: 'Task10: Painting', dataRef: 'Painting' },
+                    { tableName: 'Task11: Wall Construction', dataRef: 'Wall_Construction' },
+                    { tableName: 'Task12: Tiles and Floor Finishing', dataRef: 'Tiles_and_Floor_Finishing' },
+                    { tableName: 'Task13: Crane Operation', dataRef: 'Crane_Operation' },
+                    { tableName: 'Task14: Vehicle Movement', dataRef: 'Vehicle_movement' },
+                    { tableName: 'Task15: Carpentry Work', dataRef: 'Carpentry_work' }
+                ];
+
+                tables.forEach(({ tableName, dataRef }) => {
+                    const tableRef = ref(getDatabase(), dataRef);
+                    // Retrieve hazard data from Firebase and populate the table
+                    onValue(tableRef, (snapshot) => {
+                        const hazardData = snapshot.val();
+                        populateTable('carpentryTable', tableName, hazardData);
+                        document.getElementById('loading-screen').style.display = 'none';
+                    });
+                });
+            } else {
+                const tableto = ref(getDatabase(), dataRef);
+                // Retrieve hazard data from Firebase and populate the tables
+                onValue(tableto, (snapshot) => {
+                    const hazardData = snapshot.val();
+                    populateTable('carpentryTable', tableName, hazardData);
+                    document.getElementById('loading-screen').style.display = 'none';
+                });
+            }
+        }
+    </script>
+    <script>
+        document.getElementById('searchInput').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter' && this.value.trim() !== '') {
+                handleSearch();
+            }
+        });
+        function handleSearch() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+
+            if (searchInput.includes('slab') || searchInput.includes('roof') || searchInput.includes('floor') || searchInput.includes('roof risk') || searchInput.includes('floor risk') || searchInput.includes('slab risk')) {
+                window.location.href = 'slab.html';
+            } else if (searchInput.includes('column') || searchInput.includes('pillar') || searchInput.includes('short column')) {
+                window.location.href = 'column.html';
+            } else if (searchInput.includes('reinforcement') || searchInput.includes('steel erection')) {
+                alert('matching results found');
+                // Call the show_table function to display the table
+                //show_table('Reinforcement and Steel Erection', Reinforcement_Erection);
+            } else {
+                alert('No matching results found.');
+            }
+        }
+
+    </script>
+
+
+    <footer>
+        <div class="footer-container">
+            <!-- Title -->
+            <h2>How It Works</h2>
+
+            <!-- Points -->
+            <ul class="point-list">
+                <li>Point 1: Lorem ipsum dolor sit amet.</li>
+                <li>Point 2: Consectetur adipiscing elit.</li>
+                <li>Point 3: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                <li>Point 4: Ut enim ad minim veniam.</li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SafetyNet Builder. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

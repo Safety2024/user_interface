@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slab or Roof</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <!-- Logo and text -->
+        <a href="index.html" class="navbar-logo">
+            <img src="Picture1.jpg" alt="Logo">
+        </a>
+
+        <!-- Search bar -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search...">
+            <button class="search-button" onclick="handleSearch()">Search</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('searchInput').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter' && this.value.trim() !== '') {
+                handleSearch();
+            }
+        });
+        function handleSearch() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+
+            if (searchInput.includes('slab') || searchInput.includes('roof') || searchInput.includes('floor') || searchInput.includes('roof risk') || searchInput.includes('floor risk') || searchInput.includes('slab risk')) {
+                window.location.href = 'slab.html';
+            } else if (searchInput.includes('column') || searchInput.includes('pillar') || searchInput.includes('short column')) {
+                window.location.href = 'column.html';
+            } else {
+                alert('No matching results found.');
+            }
+        }
+    </script>
+    <h1 id="tablehead">Slab or Roof Construction Safety Risks and Mitigation Techniques</h1>
+    <div id="loading-screen">
+        <p>Loading...</p>
+    </div>
+
+    <script type="module">
+        // Function to show the loading screen
+        function showLoadingScreen() {
+            document.getElementById('loading-screen').style.display = 'block';
+        }
+
+        // Function to hide the loading screen
+        function hideLoadingScreen() {
+            document.getElementById('loading-screen').style.display = 'none';
+        }
+
+        // Retrieve hazard data from Firebase and populate the tables
+        showLoadingScreen(); // Show loading screen before fetching data
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getDatabase, ref, child, onValue, get, remove, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getStorage, ref as storageRef, getDownloadURL, deleteObject, uploadBytes } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsyys0dxq7SSNxbzQ19HqjGBUdaWgfpUM",
+            authDomain: "siteriskdatabase.firebaseapp.com",
+            databaseURL: "https://siteriskdatabase-default-rtdb.firebaseio.com",
+            projectId: "siteriskdatabase",
+            storageBucket: "siteriskdatabase.appspot.com",
+            messagingSenderId: "292672879363",
+            appId: "1:292672879363:web:8fff66c20f33e2741d0736",
+            measurementId: "G-L2NFTX5RTD"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const storage = getStorage(app);
+        const db = getDatabase();
+        const Reinforcement_Erection = ref(getDatabase(), 'Reinforcement_Erection');
+        const Concrete_mixing = ref(getDatabase(), 'Concrete_mixing');
+        const Formwork_and_Shuttering = ref(getDatabase(), 'Formwork_and_Shuttering');
+        const Concreting = ref(getDatabase(), 'Concreting');
+        const Carpentry_work = ref(getDatabase(), 'Carpentry_work');
+
+        function populateTable(tableId, tableName, hazardData) {
+            const tableContainer = document.getElementById('tableContainer');
+            const table = document.createElement('table');
+            table.id = tableId;
+            const tableHeader = document.createElement('thead');
+            const tableBody = document.createElement('tbody');
+            table.appendChild(tableHeader);
+            table.appendChild(tableBody);
+
+            // Create table header with main node name as heading
+            const headerRow = document.createElement('tr');
+            const headerCell = document.createElement('th');
+            headerCell.textContent = tableName;
+            headerCell.colSpan = 10; // Set colspan to cover all columns
+            headerCell.style.backgroundColor = '#C5E0B3'; // Set background color
+            headerCell.style.fontSize = '20px';
+            headerRow.appendChild(headerCell);
+            tableHeader.appendChild(headerRow);
+            // Create table headers
+            const headerRow2 = document.createElement('tr');
+            headerRow2.innerHTML = `
+                <th>Hazards</th>
+                <th>Consequences</th>
+                <th>Description</th>
+                <th>Likelihood</th>
+                <th>Severity</th>
+                <th>Measured Risk</th>
+                <th>Risk Rank</th>
+                <th>Risk Response</th>
+                <th>Mitigation Technique</th>
+                <th>Risk Id</th>
+            `;
+            tableHeader.appendChild(headerRow2);
+
+            tableContainer.appendChild(table);
+
+            // Populate table body with hazard data
+            for (const [hazardName, hazardDetails] of Object.entries(hazardData)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${hazardName}</td>
+                    <td>${hazardDetails.consequences}</td>
+                    <td><a href="${hazardDetails.Description}" target="_blank">Desciption</a></td>
+                    <td>${hazardDetails.likelihood}</td>
+                    <td>${hazardDetails.severity}</td>
+                    <td>${hazardDetails.Measured_Risk}</td>
+                    <td>${hazardDetails.Risk_Rank}</td>
+                    <td><a href="${hazardDetails.Risk_Response}" target="_blank">Comments</a></td>
+                    <td><a href="${hazardDetails.mitigation_technique}" target="_blank">Mitigation Technique</a></td>
+                    <td>${hazardDetails.riskId}</td>
+                `;
+                tableBody.appendChild(row);
+            }
+        }
+
+        // Retrieve hazard data from Firebase and populate the tables
+        onValue(Carpentry_work, (snapshot) => {
+            const hazardData = snapshot.val();
+            populateTable('carpentryTable', 'Task15:Carpentry Work', hazardData);
+        });
+        onValue(Formwork_and_Shuttering, (snapshot) => {
+            const hazardData = snapshot.val();
+            populateTable('Formwork_and_ShutteringTable', 'Task04:Formwork and Shuttering', hazardData);
+
+        });
+        onValue(Reinforcement_Erection, (snapshot) => {
+            const hazardData = snapshot.val();
+            populateTable('Reinforcement_ErectionTable', 'Task02:Reinforcement and Steel Erection', hazardData);
+
+        });
+        onValue(Concrete_mixing, (snapshot) => {
+            const hazardData = snapshot.val();
+            populateTable('Concrete_mixingTable', 'Task03:Concrete mixing', hazardData);
+
+        });
+        onValue(Concreting, (snapshot) => {
+            const hazardData = snapshot.val();
+            populateTable('concretingTable', 'Task06:Concreting', hazardData);
+            hideLoadingScreen();
+        });
+
+
+    </script>
+
+    <div id="tableContainer" style="margin-left: 50px;margin-right: 50px;margin-top: 50px;"></div>
+
+    <div class="container">
+        <h1 style="text-align: center;color: #333;font-size: 36px;margin-bottom: 20px;text-decoration: underline;">GRAPH
+        </h1>
+        <div class="row">
+            <img src="Picture2.png" alt="Photo 2">
+            <img src="Picture3.png" alt="Photo 3">
+        </div>
+        <div class="row">
+            <img src="Picture4.png" alt="Photo 4">
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <!-- Title -->
+            <h2>How It Works</h2>
+
+            <!-- Points -->
+            <ul class="point-list">
+                <li>Point 1: Lorem ipsum dolor sit amet.</li>
+                <li>Point 2: Consectetur adipiscing elit.</li>
+                <li>Point 3: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                <li>Point 4: Ut enim ad minim veniam.</li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SafetyNet Builder. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

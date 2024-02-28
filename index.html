@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafetyNet Builder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body
+    style="background-image: url('a_guide_to_digital_safety_management_system_fc062626ba.png');background-size: cover;background-position: center;background-repeat: no-repeat;">
+    <div class="navbar">
+        <!-- Logo and text -->
+        <a href="index.html" class="navbar-logo">
+            <img src="Picture1.jpg" alt="Logo">
+        </a>
+
+        <!-- Search bar -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search...">
+            <button class="search-button" onclick="handleSearch()">Search</button>
+        </div>
+    </div>
+
+
+
+    <main>
+
+        <section class="intro">
+            <h1 style="margin: 0;font-size: 2.5rem;">Welcome to the SafetyNet Builder</h1>
+            <p>Empowering you to create safer workplaces</p>
+            <p>Build your safety management system with ease and confidence</p>
+        </section>
+    </main>
+    <div id="loading-screen" style="display: none;">
+        <p>Loading...</p>
+    </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getDatabase, ref, child, onValue, get, remove, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getStorage, ref as storageRef, getDownloadURL, deleteObject, uploadBytes } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsyys0dxq7SSNxbzQ19HqjGBUdaWgfpUM",
+            authDomain: "siteriskdatabase.firebaseapp.com",
+            databaseURL: "https://siteriskdatabase-default-rtdb.firebaseio.com",
+            projectId: "siteriskdatabase",
+            storageBucket: "siteriskdatabase.appspot.com",
+            messagingSenderId: "292672879363",
+            appId: "1:292672879363:web:8fff66c20f33e2741d0736",
+            measurementId: "G-L2NFTX5RTD"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const storage = getStorage(app);
+        const db = getDatabase();
+        const Excavation = ref(getDatabase(), 'Excavation');
+        const Reinforcement_Erection = ref(getDatabase(), 'Reinforcement_Erection');
+        const Concrete_mixing = ref(getDatabase(), 'Concrete_mixing');
+        const Formwork_and_Shuttering = ref(getDatabase(), 'Formwork_and_Shuttering');
+        const Hotwork = ref(getDatabase(), 'Hotwork');
+        const Concreting = ref(getDatabase(), 'Concreting');
+        const Hoist = ref(getDatabase(), 'Hoist');
+        const Drilling = ref(getDatabase(), 'Drilling');
+        const Scaffold_Ladder = ref(getDatabase(), 'Scaffold_Ladder');
+        const Painting = ref(getDatabase(), 'Painting');
+        const Wall_Construction = ref(getDatabase(), 'Wall_Construction');
+        const Tiles_and_Floor_Finishing = ref(getDatabase(), 'Tiles_and_Floor_Finishing');
+        const Crane_Operation = ref(getDatabase(), 'Crane_Operation');
+        const Vehicle_movement = ref(getDatabase(), 'Vehicle_movement ');
+        const Carpentry_work = ref(getDatabase(), 'Carpentry_work');
+        const ConcretinghazardData = {
+            "Contact with wet cement": {
+                "consequences": "Causes damages to skin, tissues and lungs",
+                "Description": "t6h1d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t6h1r.html",
+                "mitigation_technique": "t6h1m.html",
+                "riskId": "R-17"
+            },
+            "Improper use of PPE": {
+                "consequences": "Peeling of skin, inflation",
+                "Description": "t6h2d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t6h2r.html",
+                "mitigation_technique": "t6h2m.html",
+                "riskId": "R-18"
+            }
+        };
+        set(Concreting, ConcretinghazardData);
+        const Carpentry_workhazardData = {
+            "Inhalation of wood dust": {
+                "consequences": "Mucosal, respiratory effects",
+                "Description": "t15h1d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t15h1r.html",
+                "mitigation_technique": "t15h1m.html",
+                "riskId": "R-40"
+            },
+            "Tools and Equipment": {
+                "consequences": "cuts, lacerations, amputations",
+                "Description": "t15h2d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t15h2r.html",
+                "mitigation_technique": "t15h2m.html",
+                "riskId": "R-41"
+            }
+        };
+        set(Carpentry_work, Carpentry_workhazardData);
+        const Formwork_and_ShutteringhazardData = {
+            "Collapse of formwork": {
+                "consequences": "Spinal cord damage, Fatality",
+                "Description": "t4h1d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t4h1r.html",
+                "mitigation_technique": "t4h1m.html",
+                "riskId": "R-12"
+            },
+            "Fall from height": {
+                "consequences": "Spinal cord damage, Fatality",
+                "Description": "t4h2d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t4h2r.html",
+                "mitigation_technique": "t4h2m.html",
+                "riskId": "R-13"
+            },
+            "Struck by falling object": {
+                "consequences": "Bruises, lacerations",
+                "Description": "t4h3d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t4h3r.html",
+                "mitigation_technique": "t4h3m.html",
+                "riskId": "R-14"
+            }
+        };
+        set(Formwork_and_Shuttering, Formwork_and_ShutteringhazardData);
+        const Reinforcement_ErectionhazardData = {
+            "Manual handling": {
+                "consequences": "Crush in",
+                "Description": "t2h1d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t2h1r.html",
+                "mitigation_technique": "t2h1m.html",
+                "riskId": "R-5"
+            },
+            "Struck by steel bars": {
+                "consequences": "Cuts, Lacerations",
+                "Description": "t2h2d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t2h2r.html",
+                "mitigation_technique": "t2h2m.html",
+                "riskId": "R-6"
+            },
+            "Fall from height": {
+                "consequences": "Spinal cord damage, Fatality",
+                "Description": "t2h3d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t2h3r.html",
+                "mitigation_technique": "t2h3m.html",
+                "riskId": "R-7"
+            }
+        };
+        set(Reinforcement_Erection, Reinforcement_ErectionhazardData);
+        const Concrete_mixinghazardData = {
+            "Exposure to cement dust": {
+                "consequences": "Silicosis, irritation in nose and throat",
+                "Description": "t3h1d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t3h1r.html",
+                "mitigation_technique": "t3h1m.html",
+                "riskId": "R-8"
+            },
+            "Manual lifting and handling": {
+                "consequences": "Immediate injuries, long term health issues",
+                "Description": "t3h2d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t3h2r.html",
+                "mitigation_technique": "t3h2m.html",
+                "riskId": "R-9"
+            },
+            "Contact with wet cement ": {
+                "consequences": "Causes damages to skin, tissues and lungs",
+                "Description": "t3h3d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t3h3r.html",
+                "mitigation_technique": "t3h3m.html",
+                "riskId": "R-10"
+            },
+            "Noise": {
+                "consequences": "Irritation",
+                "Description": "t3h4d.html",
+                "likelihood": 2,
+                "severity": 4,
+                "Measured_Risk": 8,
+                "Risk_Rank": "Medium",
+                "Risk_Response": "t3h4r.html",
+                "mitigation_technique": "t3h4m.html",
+                "riskId": "R-11"
+            }
+        };
+        set(Concrete_mixing, Concrete_mixinghazardData);
+
+    </script>
+    <script>
+        document.getElementById('searchInput').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter' && this.value.trim() !== '') {
+                handleSearch();
+            }
+        });
+
+
+        function handleSearch() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+
+            if (searchInput.includes('slab') || searchInput.includes('roof') || searchInput.includes('floor') || searchInput.includes('roof risk') || searchInput.includes('floor risk') || searchInput.includes('slab risk')) {
+                window.location.href = 'slab.html';
+            } else if (searchInput.includes('column') || searchInput.includes('pillar') || searchInput.includes('short column')) {
+                window.location.href = 'column.html';
+            }
+            else if (searchInput.includes('excavation') || searchInput.includes('digging') || searchInput.includes('excavate') || searchInput.includes('dig')) {
+
+                const tableName = 'Task01: Excavation';
+                const dataRef = 'Excavation';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('reinforcement') || searchInput.includes('steel erection')) {
+
+                const tableName = 'Task02: Reinforcement and Steel Erection';
+                const dataRef = 'Reinforcement_Erection';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('concreate') || searchInput.includes('concrete batching') || searchInput.includes('concrete mixer') || searchInput.includes('concrete mixing')) {
+
+                const tableName = 'Task03: Concrete Mixing';
+                const dataRef = 'Concrete_mixing';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('formwork') || searchInput.includes('shuttering') || searchInput.includes('formwork and shuttering')) {
+
+                const tableName = 'Task04: Formwork and Shuttering';
+                const dataRef = 'Formwork_and_Shuttering';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('hotwork') || searchInput.includes('weld') || searchInput.includes('welding') || searchInput.includes('electrical work')) {
+
+                const tableName = 'Task05: Hotwork';
+                const dataRef = 'Hotwork';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('concrete pour') || searchInput.includes('concrete pouring') || searchInput.includes('concreting')) {
+
+                const tableName = 'Task06: Concreting';
+                const dataRef = 'Concreting';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('hoist') || searchInput.includes('hoisting') || searchInput.includes('lifting')) {
+
+                const tableName = 'Task07: Hoist';
+                const dataRef = 'Hoist';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('drilling') || searchInput.includes('boring')) {
+
+                const tableName = 'Task08: Drilling';
+                const dataRef = 'Drilling';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('scaffold') || searchInput.includes('ladder')) {
+
+                const tableName = 'Task09: Scaffold/Ladder';
+                const dataRef = 'Scaffold_Ladder';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('painting') || searchInput.includes('paint') || searchInput.includes('color') || searchInput.includes('colour') || searchInput.includes('coloring')) {
+
+                const tableName = 'Task10: Painting';
+                const dataRef = 'Painting';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('wall construction') || searchInput.includes('wall')) {
+
+                const tableName = 'Task11: Wall Construction';
+                const dataRef = 'Wall_Construction';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('tiles') || searchInput.includes('floor finishing') || searchInput.includes('tiles and floor finishing')) {
+
+                const tableName = 'Task12: Tiles and Floor Finishing';
+                const dataRef = 'Tiles_and_Floor_Finishing';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('crane') || searchInput.includes('crane operation') || searchInput.includes('crane work')) {
+
+                const tableName = 'Task13: Crane Operation';
+                const dataRef = 'Crane_Operation';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('construction vehicle') || searchInput.includes('vehicle') || searchInput.includes('excavator') || searchInput.includes('bulldozer') || searchInput.includes('loader') || searchInput.includes('truck')) {
+
+                const tableName = 'Task14: Vehicle Movement';
+                const dataRef = 'Vehicle_movement';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('carpentry work') || searchInput.includes('carpentry') || searchInput.includes('wood work') || searchInput.includes('wood')) {
+
+                const tableName = 'Task15: Carpentry Work';
+                const dataRef = 'Carpentry_work';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('all') || searchInput.includes('show all')) {
+
+                const tableName = 'All Task Show';
+                const dataRef = 'all';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else {
+                alert('No matching results found.');
+            }
+        }
+
+    </script>
+    <div id="tableContainer" style="margin-left: 50px;margin-right: 50px;margin-top: 50px;"></div>
+
+    <footer>
+        <div class="footer-container">
+            <!-- Title -->
+            <h2>How It Works</h2>
+
+            <!-- Points -->
+            <ul class="point-list">
+                <li>Point 1: Lorem ipsum dolor sit amet.</li>
+                <li>Point 2: Consectetur adipiscing elit.</li>
+                <li>Point 3: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                <li>Point 4: Ut enim ad minim veniam.</li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SafetyNet Builder. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
