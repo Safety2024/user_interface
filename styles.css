@@ -201,7 +201,8 @@ footer {
 
 .left-column {
     width: 50%;
-    padding-right: 50px; /* Add space between columns */
+    padding-left: 50px;
+    padding-right: 20px; /* Add space between columns */
     border-right: 1px solid white; /* Add vertical line */
     border-collapse: collapse;
     border: none;
