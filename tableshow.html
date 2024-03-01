@@ -99,17 +99,23 @@
             // Create table headers
             const headerRow2 = document.createElement('tr');
             headerRow2.innerHTML = `
-                <th>Hazards</th>
-                <th>Consequences</th>
-                <th>Description</th>
-                <th>Likelihood(L)</th>
-                <th>Severity(S)</th>
-                <th>Measured Risk(SxL)</th>
-                <th>Risk Rank</th>
-                <th>Risk Level and responses</th>
-                <th>Mitigation Technique</th>
-                <th>Risk Id</th>
-            `;
+        <th>Hazards</th>
+        <th>Consequences</th>
+        <th>Description</th>
+        <th>Likelihood(L)</th>
+        <th>Severity(S)</th>
+        <th class="headerWithButton">
+    <div class="headerContent">
+        Measured Risk
+    </div>
+    <button class="sortButton">Sort</button>
+</th>
+
+        <th>Risk Rank</th>
+        <th>Risk Level and responses</th>
+        <th>Mitigation Technique</th>
+        <th>Risk Id</th>
+    `;
             tableHeader.appendChild(headerRow2);
 
             tableContainer.appendChild(table);
@@ -118,21 +124,58 @@
             for (const [hazardName, hazardDetails] of Object.entries(hazardData)) {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${hazardName}</td>
-                    <td>${hazardDetails.consequences}</td>
-                    <td><a href="${hazardDetails.Description}" target="_blank">Link</a></td>
-                    <td>${hazardDetails.likelihood}</td>
-                    <td>${hazardDetails.severity}</td>
-                    <td>${hazardDetails.Measured_Risk}</td>
-                    <td>${hazardDetails.Risk_Rank}</td>
-                    <td><a href="${hazardDetails.Risk_Response}" target="_blank">Link</a></td>
-                    <td><a href="${hazardDetails.mitigation_technique}" target="_blank">Link</a></td>
-                    <td>${hazardDetails.riskId}</td>
-                `;
+            <td>${hazardName}</td>
+            <td>${hazardDetails.consequences}</td>
+            <td><a href="${hazardDetails.Description}" target="_blank">Link</a></td>
+            <td>${hazardDetails.likelihood}</td>
+            <td>${hazardDetails.severity}</td>
+            <td>${hazardDetails.Measured_Risk}</td>
+            <td>${hazardDetails.Risk_Rank}</td>
+            <td><a href="${hazardDetails.Risk_Response}" target="_blank">Link</a></td>
+            <td><a href="${hazardDetails.mitigation_technique}" target="_blank">Link</a></td>
+            <td>${hazardDetails.riskId}</td>
+        `;
                 tableBody.appendChild(row);
             }
 
+            // Add event listener to the sort buttons
+            const sortButtons = table.querySelectorAll('.sortButton');
+            sortButtons.forEach(button => {
+                let sortOrder = 'asc'; // Default sorting order
+                button.addEventListener('click', () => {
+                    const columnIndex = 5; // Measured Risk column index
+                    sortTable(table, columnIndex, sortOrder);
+
+                    // Toggle sorting order for the next click
+                    sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+                });
+            });
+
         }
+
+        function sortTable(table, columnIndex, sortOrder) {
+            const tableBody = table.querySelector('tbody');
+            const rows = Array.from(tableBody.querySelectorAll('tr'));
+
+            rows.sort((a, b) => {
+                let aValue = parseFloat(a.cells[columnIndex].textContent);
+                let bValue = parseFloat(b.cells[columnIndex].textContent);
+
+                // Adjust sorting based on the sortOrder parameter
+                if (sortOrder === 'asc') {
+                    return aValue - bValue;
+                } else {
+                    return bValue - aValue;
+                }
+            });
+
+            // Remove existing rows from the table
+            rows.forEach(row => tableBody.removeChild(row));
+
+            // Re-append sorted rows to the table
+            rows.forEach(row => tableBody.appendChild(row));
+        }
+
         function show_table() {
             document.getElementById('loading-screen').style.display = 'block';
             if (dataRef == 'all') {
@@ -188,6 +231,15 @@
                 window.location.href = 'slab.html';
             } else if (searchInput.includes('column') || searchInput.includes('pillar') || searchInput.includes('short column')) {
                 window.location.href = 'column.html';
+            }
+            else if (searchInput.includes('wall') || searchInput.includes('walls') || searchInput.includes('wall constraction')) {
+                window.location.href = 'wall.html';
+            }
+            else if (searchInput.includes('beam') || searchInput.includes('grade beam') || searchInput.includes('roof beam')) {
+                window.location.href = 'beam.html';
+            }
+            else if (searchInput.includes('footing') || searchInput.includes('shallow foundation') || searchInput.includes('shallow')) {
+                window.location.href = 'footing.html';
             }
             else if (searchInput.includes('excavation') || searchInput.includes('digging') || searchInput.includes('excavate') || searchInput.includes('dig')) {
 
@@ -285,14 +337,27 @@
                 const dataRef = 'all';
                 window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
             }
+            else if (searchInput.includes('hazard') || searchInput.includes('hazards')) {
+
+                const dataRef = searchInput;
+                window.location.href = `hazard.html?dataRef=${encodeURIComponent(dataRef)}`;
+            }
             else {
                 alert('No matching results found.');
             }
         }
 
-
     </script>
+    <div id="tableContainer" style="margin-left: 50px;margin-right: 50px;margin-top: 50px;"></div>
+    <div class="container">
+        <h1 style="text-align: center;color: #333;font-size: 36px;margin-bottom: 20px;text-decoration: underline;">TABLE
+        </h1>
+        <div class="row1">
+            <img src="Screenshot (664).png" alt="Photo 2">
+            <img src="Screenshot (665).png" alt="Photo 4">
+        </div>
 
+    </div>
 
     <footer>
         <div class="footer-container">
@@ -303,8 +368,10 @@
             <ul class="point-list">
                 <li>Point 1: Use the search button to find specific tasks or works on the construction site.</li>
                 <li>Point 2: Click "Description" to learn more about any hazard listed</li>
-                <li>Point 3: Click "Comments" or "Mitigation technique" for details on risk level, responses, or mitigation techniques related to a hazard.</li>
-                <li>Point 4: Clicking on hazard details opens a new page. Close it to return to the homepage or select the "Home" tab.</li>
+                <li>Point 3: Click "Comments" or "Mitigation technique" for details on risk level, responses, or
+                    mitigation techniques related to a hazard.</li>
+                <li>Point 4: Clicking on hazard details opens a new page. Close it to return to the homepage or select
+                    the "Home" tab.</li>
             </ul>
         </div>
         <div class="footer-bottom">

@@ -76,94 +76,58 @@
         const Wall_Construction = ref(getDatabase(), 'Wall_Construction');
         const Tiles_and_Floor_Finishing = ref(getDatabase(), 'Tiles_and_Floor_Finishing');
         const Crane_Operation = ref(getDatabase(), 'Crane_Operation');
-        const Vehicle_movement = ref(getDatabase(), 'Vehicle_movement ');
+        const Vehicle_movement = ref(getDatabase(), 'Vehicle_movement');
         const Carpentry_work = ref(getDatabase(), 'Carpentry_work');
-        const ConcretinghazardData = {
-            "Contact with wet cement": {
-                "consequences": "Causes damages to skin, tissues and lungs",
-                "Description": "t6h1d.html",
-                "likelihood": 4.6,
-                "severity": 3.06,
-                "Measured_Risk": 14.08,
-                "Risk_Rank": "10th",
-                "Risk_Response": "t6h1r.html",
-                "mitigation_technique": "t6h1m.html",
-                "riskId": "T-61"
+        const hazard = ref(getDatabase(), 'hazard');
+
+        //add
+        const ExcavationhazardData = {
+            "Cave Ins": {
+                "consequences": "Fractures, Pain",
+                "Description": "t1h1d.html",
+                "likelihood": 2.91,
+                "severity": 3.09,
+                "Measured_Risk": 8.99,
+                "Risk_Rank": "33nd",
+                "Risk_Response": "t1h1r.html",
+                "mitigation_technique": "t1h1m.html",
+                "riskId": "T-11"
             },
-            "Improper use of PPE": {
-                "consequences": "Peeling of skin, inflation",
-                "Description": "t6h2d.html",
-                "likelihood": 4.56,
-                "severity": 2.52,
-                "Measured_Risk": 11.49,
-                "Risk_Rank": "18th",
-                "Risk_Response": "t6h2r.html",
-                "mitigation_technique": "t6h2m.html",
-                "riskId": "T-62"
+            "Underground utilities": {
+                "consequences": "Ventricular fibrillation, burns",
+                "Description": "t1h2d.html",
+                "likelihood": 3.31,
+                "severity": 3.67,
+                "Measured_Risk": 12.15,
+                "Risk_Rank": "15th",
+                "Risk_Response": "t1h2r.html",
+                "mitigation_technique": "t1h2m.html",
+                "riskId": "T-12"
+            },
+            "Falls into excavation": {
+                "consequences": "Sprains, strains, fractures",
+                "Description": "t1h3d.html",
+                "likelihood": 2.89,
+                "severity": 3.96,
+                "Measured_Risk": 11.44,
+                "Risk_Rank": "19th",
+                "Risk_Response": "t1h3r.html",
+                "mitigation_technique": "t1h3m.html",
+                "riskId": "T-13"
+            },
+            "Ground water seepage": {
+                "consequences": "Minor injuries",
+                "Description": "t1h4d.html",
+                "likelihood": 4.41,
+                "severity": 1.58,
+                "Measured_Risk": 6.97,
+                "Risk_Rank": "39th",
+                "Risk_Response": "t1h4r.html",
+                "mitigation_technique": "t1h4m.html",
+                "riskId": "T-14"
             }
         };
-        set(Concreting, ConcretinghazardData);
-        const Carpentry_workhazardData = {
-            "Inhalation of wood dust": {
-                "consequences": "Mucosal, respiratory effects",
-                "Description": "t15h1d.html",
-                "likelihood": 4.68,
-                "severity": 3.51,
-                "Measured_Risk": 16.43,
-                "Risk_Rank": "6th",
-                "Risk_Response": "t15h1r.html",
-                "mitigation_technique": "t15h1m.html",
-                "riskId": "T-151"
-            },
-            "Tools and Equipment": {
-                "consequences": "cuts, lacerations, amputations",
-                "Description": "t15h2d.html",
-                "likelihood": 2.95,
-                "severity": 3.44,
-                "Measured_Risk": 10.15,
-                "Risk_Rank": "28th",
-                "Risk_Response": "t15h2r.html",
-                "mitigation_technique": "t15h2m.html",
-                "riskId": "T-152"
-            }
-        };
-        set(Carpentry_work, Carpentry_workhazardData);
-        const Formwork_and_ShutteringhazardData = {
-            "Collapse of formwork": {
-                "consequences": "Spinal cord damage, Fatality",
-                "Description": "t4h1d.html",
-                "likelihood": 3.46,
-                "severity": 4.5,
-                "Measured_Risk": 15.57,
-                "Risk_Rank": "7th",
-                "Risk_Response": "t4h1r.html",
-                "mitigation_technique": "t4h1m.html",
-                "riskId": "T-41"
-            },
-            "Fall from height": {
-                "consequences": "Spinal cord damage, Fatality",
-                "Description": "t4h2d.html",
-                "likelihood": 4.29,
-                "severity": 4.76,
-                "Measured_Risk": 20.42,
-                "Risk_Rank": "1st",
-                "Risk_Response": "t4h2r.html",
-                "mitigation_technique": "t4h2m.html",
-                "riskId": "T-42"
-            },
-            "Struck by falling object": {
-                "consequences": "Bruises, lacerations",
-                "Description": "t4h3d.html",
-                "likelihood": 3.22,
-                "severity": 4.22,
-                "Measured_Risk": 13.59,
-                "Risk_Rank": "12nd",
-                "Risk_Response": "t4h3r.html",
-                "mitigation_technique": "t4h3m.html",
-                "riskId": "T-43"
-            }
-        };
-        set(Formwork_and_Shuttering, Formwork_and_ShutteringhazardData);
+        set(Excavation, ExcavationhazardData);
         const Reinforcement_ErectionhazardData = {
             "Manual handling": {
                 "consequences": "Crush in",
@@ -216,8 +180,8 @@
                 "consequences": "Immediate injuries, long term health issues",
                 "Description": "t3h2d.html",
                 "likelihood": 4.19,
-                "severity": 1.66,
-                "Measured_Risk": 7.87,
+                "severity": 2.59,
+                "Measured_Risk": 10.85,
                 "Risk_Rank": "26th",
                 "Risk_Response": "t3h2r.html",
                 "mitigation_technique": "t3h2m.html",
@@ -247,7 +211,848 @@
             }
         };
         set(Concrete_mixing, Concrete_mixinghazardData);
-
+        const Formwork_and_ShutteringhazardData = {
+            "Collapse of formwork": {
+                "consequences": "Spinal cord damage, Fatality",
+                "Description": "t4h1d.html",
+                "likelihood": 3.46,
+                "severity": 4.5,
+                "Measured_Risk": 15.57,
+                "Risk_Rank": "7th",
+                "Risk_Response": "t4h1r.html",
+                "mitigation_technique": "t4h1m.html",
+                "riskId": "T-41"
+            },
+            "Fall from height": {
+                "consequences": "Spinal cord damage, Fatality",
+                "Description": "t4h2d.html",
+                "likelihood": 4.29,
+                "severity": 4.76,
+                "Measured_Risk": 20.42,
+                "Risk_Rank": "1st",
+                "Risk_Response": "t4h2r.html",
+                "mitigation_technique": "t4h2m.html",
+                "riskId": "T-42"
+            },
+            "Struck by falling object": {
+                "consequences": "Bruises, lacerations",
+                "Description": "t4h3d.html",
+                "likelihood": 3.22,
+                "severity": 4.22,
+                "Measured_Risk": 13.59,
+                "Risk_Rank": "12nd",
+                "Risk_Response": "t4h3r.html",
+                "mitigation_technique": "t4h3m.html",
+                "riskId": "T-43"
+            }
+        };
+        set(Formwork_and_Shuttering, Formwork_and_ShutteringhazardData);
+        const HotworkhazardData = {
+            "Fire Hazards": {
+                "consequences": "Ventricular fibrillation , burns",
+                "Description": "t5h1d.html",
+                "likelihood": 2.65,
+                "severity": 4.2,
+                "Measured_Risk": 11.13,
+                "Risk_Rank": "21st",
+                "Risk_Response": "t5h1r.html",
+                "mitigation_technique": "t5h1m.html",
+                "riskId": "T-51"
+            },
+            "Improper use of PPE": {
+                "consequences": "Burns, inflation",
+                "Description": "t5h2d.html",
+                "likelihood": 3.34,
+                "severity": 3.34,
+                "Measured_Risk": 11.16,
+                "Risk_Rank": "22nd",
+                "Risk_Response": "t5h2r.html",
+                "mitigation_technique": "t5h2m.html",
+                "riskId": "T-52"
+            }
+        };
+        set(Hotwork, HotworkhazardData);
+        const ConcretinghazardData = {
+            "Contact with wet cement": {
+                "consequences": "Causes damages to skin, tissues and lungs",
+                "Description": "t6h1d.html",
+                "likelihood": 4.6,
+                "severity": 3.06,
+                "Measured_Risk": 14.08,
+                "Risk_Rank": "10th",
+                "Risk_Response": "t6h1r.html",
+                "mitigation_technique": "t6h1m.html",
+                "riskId": "T-61"
+            },
+            "Improper use of PPE": {
+                "consequences": "Peeling of skin, inflation",
+                "Description": "t6h2d.html",
+                "likelihood": 4.56,
+                "severity": 2.52,
+                "Measured_Risk": 11.49,
+                "Risk_Rank": "18th",
+                "Risk_Response": "t6h2r.html",
+                "mitigation_technique": "t6h2m.html",
+                "riskId": "T-62"
+            }
+        };
+        set(Concreting, ConcretinghazardData);
+        const HoisthazardData = {
+            "Fall from height": {
+                "consequences": "Pain, Bruises, Lacerations, Fatality",
+                "Description": "t7h1d.html",
+                "likelihood": 3.49,
+                "severity": 3.79,
+                "Measured_Risk": 13.23,
+                "Risk_Rank": "13th",
+                "Risk_Response": "t7h1r.html",
+                "mitigation_technique": "t7h1m.html",
+                "riskId": "T-71"
+            },
+            "Fall of objects ": {
+                "consequences": "Multiple injuries",
+                "Description": "t7h2d.html",
+                "likelihood": 3.15,
+                "severity": 3.69,
+                "Measured_Risk": 11.62,
+                "Risk_Rank": "17th",
+                "Risk_Response": "t7h2r.html",
+                "mitigation_technique": "t7h2m.html",
+                "riskId": "T-72"
+            }
+        };
+        set(Hoist, HoisthazardData);
+        const DrillinghazardData = {
+            "Dust and airborne particles": {
+                "consequences": "Asthma, coughing, sneezing",
+                "Description": "t8h1d.html",
+                "likelihood": 4.44,
+                "severity": 1.97,
+                "Measured_Risk": 8.75,
+                "Risk_Rank": "34th",
+                "Risk_Response": "t8h1r.html",
+                "mitigation_technique": "t8h1m.html",
+                "riskId": "T-81"
+            },
+            "Electrical": {
+                "consequences": "Ventricular fibrillation, burns",
+                "Description": "t8h2d.html",
+                "likelihood": 1.54,
+                "severity": 3.34,
+                "Measured_Risk": 5.14,
+                "Risk_Rank": "41st",
+                "Risk_Response": "t8h2r.html",
+                "mitigation_technique": "t8h2m.html",
+                "riskId": "T-82"
+            },
+            "Noise": {
+                "consequences": "Irritation, deafness",
+                "Description": "t4h3d.html",
+                "likelihood": 4.69,
+                "severity": 2.35,
+                "Measured_Risk": 11.02,
+                "Risk_Rank": "24th",
+                "Risk_Response": "t8h3r.html",
+                "mitigation_technique": "t8h3m.html",
+                "riskId": "T-83"
+            }
+        };
+        set(Drilling, DrillinghazardData);
+        const Scaffold_LadderhazardData = {
+            "Fall from height": {
+                "consequences": "Spinal cord damage, fatality",
+                "Description": "t9h1d.html",
+                "likelihood": 3.7,
+                "severity": 4.59,
+                "Measured_Risk": 16.98,
+                "Risk_Rank": "5th",
+                "Risk_Response": "t9h1r.html",
+                "mitigation_technique": "t9h1m.html",
+                "riskId": "T-91"
+            },
+            "Collapse of scaffold": {
+                "consequences": "Spinal cord damage, Fatality",
+                "Description": "t9h2d.html",
+                "likelihood": 3.25,
+                "severity": 4.19,
+                "Measured_Risk": 13.62,
+                "Risk_Rank": "11st",
+                "Risk_Response": "t9h2r.html",
+                "mitigation_technique": "t9h2m.html",
+                "riskId": "T-92"
+            },
+            "Fall of objects ": {
+                "consequences": "Multiple injuries",
+                "Description": "t9h3d.html",
+                "likelihood": 4.28,
+                "severity": 4.73,
+                "Measured_Risk": 20.24,
+                "Risk_Rank": "2nd",
+                "Risk_Response": "t9h3r.html",
+                "mitigation_technique": "t9h3m.html",
+                "riskId": "T-93"
+            }
+        };
+        set(Scaffold_Ladder, Scaffold_LadderhazardData);
+        const PaintinghazardData = {
+            "Fall from height": {
+                "consequences": "Pain ,fracture",
+                "Description": "t10h1d.html",
+                "likelihood": 3.01,
+                "severity": 3.99,
+                "Measured_Risk": 12.01,
+                "Risk_Rank": "16th",
+                "Risk_Response": "t10h1r.html",
+                "mitigation_technique": "t10h1m.html",
+                "riskId": "T-101"
+            },
+            "Chemical Exposure": {
+                "consequences": "damages to skin, tissues",
+                "Description": "t10h2d.html",
+                "likelihood": 4.28,
+                "severity": 2.63,
+                "Measured_Risk": 11.26,
+                "Risk_Rank": "20th",
+                "Risk_Response": "t10h2r.html",
+                "mitigation_technique": "t10h2m.html",
+                "riskId": "T-102"
+            }
+        };
+        set(Painting, PaintinghazardData);
+        const Wall_ConstructionhazardData = {
+            "Fall from height": {
+                "consequences": "Pain ,fracture",
+                "Description": "t11h1d.html",
+                "likelihood": 2.83,
+                "severity": 321,
+                "Measured_Risk": 9.05,
+                "Risk_Rank": "32nd",
+                "Risk_Response": "t11h1r.html",
+                "mitigation_technique": "t11h1m.html",
+                "riskId": "T-111"
+            },
+            "Contact with wet cement": {
+                "consequences": "Causes damages to skin, tissues and lungs",
+                "Description": "t11h2d.html",
+                "likelihood": 4.2,
+                "severity": 2.4,
+                "Measured_Risk": 10.08,
+                "Risk_Rank": "29th",
+                "Risk_Response": "t11h2r.html",
+                "mitigation_technique": "t11h2m.html",
+                "riskId": "T-112"
+            },
+            "Manual lifting and handling": {
+                "consequences": "Immediate injuries",
+                "Description": "t11h3d.html",
+                "likelihood": 4.04,
+                "severity": 2.58,
+                "Measured_Risk": 10.42,
+                "Risk_Rank": "18th",
+                "Risk_Response": "t11h3r.html",
+                "mitigation_technique": "t11h3m.html",
+                "riskId": "T-113"
+            }
+        };
+        set(Wall_Construction, Wall_ConstructionhazardData);
+        const Tiles_and_Floor_FinishinghazardData = {
+            "Tools and Equipment": {
+                "consequences": "cuts, lacerations, amputations",
+                "Description": "t12h1d.html",
+                "likelihood": 2.88,
+                "severity": 2.9,
+                "Measured_Risk": 8.35,
+                "Risk_Rank": "36th",
+                "Risk_Response": "t12h1r.html",
+                "mitigation_technique": "t12h1m.html",
+                "riskId": "T-121"
+            },
+            "Chemical Exposure": {
+                "consequences": "Causes damages to skin, tissues",
+                "Description": "t12h2d.html",
+                "likelihood": 2.69,
+                "severity": 2.27,
+                "Measured_Risk": 6.11,
+                "Risk_Rank": "40th",
+                "Risk_Response": "t12h2r.html",
+                "mitigation_technique": "t12h2m.html",
+                "riskId": "T-122"
+            },
+            "Fall from height": {
+                "consequences": "Spinal cord damage, fatality",
+                "Description": "t12h3d.html",
+                "likelihood": 2.69,
+                "severity": 3.77,
+                "Measured_Risk": 9.31,
+                "Risk_Rank": "30th",
+                "Risk_Response": "t12h3r.html",
+                "mitigation_technique": "t12h3m.html",
+                "riskId": "T-123"
+            }
+        };
+        set(Tiles_and_Floor_Finishing, Tiles_and_Floor_FinishinghazardData);
+        const Crane_OperationhazardData = {
+            "Overhead power lines": {
+                "consequences": "Ventricular fibrillation, burns",
+                "Description": "t13h1d.html",
+                "likelihood": 4.07,
+                "severity": 4.46,
+                "Measured_Risk": 18.15,
+                "Risk_Rank": "3rd",
+                "Risk_Response": "t13h1r.html",
+                "mitigation_technique": "t13h1m.html",
+                "riskId": "T-131"
+            },
+            "Inadequate maintenance": {
+                "consequences": "Breaking of rope",
+                "Description": "t13h2d.html",
+                "likelihood": 3.67,
+                "severity": 4.07,
+                "Measured_Risk": 14.94,
+                "Risk_Rank": "8th",
+                "Risk_Response": "t13h2r.html",
+                "mitigation_technique": "t13h2m.html",
+                "riskId": "T-132"
+            },
+            "Unskilled operation": {
+                "consequences": "Collisions with workers and materials",
+                "Description": "t13h3d.html",
+                "likelihood": 2.21,
+                "severity": 4.13,
+                "Measured_Risk": 9.13,
+                "Risk_Rank": "31st",
+                "Risk_Response": "t13h3r.html",
+                "mitigation_technique": "t13h3m.html",
+                "riskId": "T-133"
+            }
+        };
+        set(Crane_Operation, Crane_OperationhazardData);
+        const Vehicle_movementhazardData = {
+            "Access improperly": {
+                "consequences": "Overturning",
+                "Description": "t14h1d.html",
+                "likelihood": 2.58,
+                "severity": 3.03,
+                "Measured_Risk": 7.82,
+                "Risk_Rank": "38th",
+                "Risk_Response": "t14h1r.html",
+                "mitigation_technique": "t14h1m.html",
+                "riskId": "T-141"
+            },
+            "Unskilled operation": {
+                "consequences": "Collisions with workers and materials",
+                "Description": "t14h2d.html",
+                "likelihood": 2.29,
+                "severity": 3.67,
+                "Measured_Risk": 8.4,
+                "Risk_Rank": "35th",
+                "Risk_Response": "t14h2r.html",
+                "mitigation_technique": "t14h2m.html",
+                "riskId": "T-142"
+            }
+        };
+        set(Vehicle_movement, Vehicle_movementhazardData);
+        const Carpentry_workhazardData = {
+            "Inhalation of wood dust": {
+                "consequences": "Mucosal, respiratory effects",
+                "Description": "t15h1d.html",
+                "likelihood": 4.68,
+                "severity": 3.51,
+                "Measured_Risk": 16.43,
+                "Risk_Rank": "6th",
+                "Risk_Response": "t15h1r.html",
+                "mitigation_technique": "t15h1m.html",
+                "riskId": "T-151"
+            },
+            "Tools and Equipment": {
+                "consequences": "cuts, lacerations, amputations",
+                "Description": "t15h2d.html",
+                "likelihood": 2.95,
+                "severity": 3.44,
+                "Measured_Risk": 10.15,
+                "Risk_Rank": "28th",
+                "Risk_Response": "t15h2r.html",
+                "mitigation_technique": "t15h2m.html",
+                "riskId": "T-152"
+            }
+        };
+        set(Carpentry_work, Carpentry_workhazardData);
+        const hazardData = {
+            "Inhalation of wood dust": {
+                "Description": "t15h1d.html",
+                "Measured_Risk": 16.43,
+                "Risk_Rank": "6th",
+                "Risk_Response": "t15h1r.html",
+                "consequences": "Mucosal, respiratory effects",
+                "likelihood": 4.68,
+                "mitigation_technique": "t15h1m.html",
+                "riskId": "T-151",
+                "severity": 3.51
+            },
+            "Tools and Equipment0": {
+                "Description": "t15h2d.html",
+                "Measured_Risk": 10.15,
+                "Risk_Rank": "28th",
+                "Risk_Response": "t15h2r.html",
+                "consequences": "cuts, lacerations, amputations",
+                "likelihood": 2.95,
+                "mitigation_technique": "t15h2m.html",
+                "riskId": "T-152",
+                "severity": 3.44
+            },
+            "Contact with wet cement2": {
+                "Description": "t3h3d.html",
+                "Measured_Risk": 14.58,
+                "Risk_Rank": "9th",
+                "Risk_Response": "t3h3r.html",
+                "consequences": "Causes damages to skin, tissues and lungs",
+                "likelihood": 4.63,
+                "mitigation_technique": "t3h3m.html",
+                "riskId": "T-33",
+                "severity": 3.15
+            },
+            "Exposure to cement dust": {
+                "Description": "t3h1d.html",
+                "Measured_Risk": 11.09,
+                "Risk_Rank": "23nd",
+                "Risk_Response": "t3h1r.html",
+                "consequences": "Silicosis, irritation in nose and throat",
+                "likelihood": 4.78,
+                "mitigation_technique": "t3h1m.html",
+                "riskId": "T-31",
+                "severity": 2.32
+            },
+            "Manual lifting and handling0": {
+                "Description": "t3h2d.html",
+                "Measured_Risk": 7.87,
+                "Risk_Rank": "26th",
+                "Risk_Response": "t3h2r.html",
+                "consequences": "Immediate injuries, long term health issues",
+                "likelihood": 4.19,
+                "mitigation_technique": "t3h2m.html",
+                "riskId": "T-32",
+                "severity": 1.66
+            },
+            "Noise0": {
+                "Description": "t3h4d.html",
+                "Measured_Risk": 7.87,
+                "Risk_Rank": "37th",
+                "Risk_Response": "t3h4r.html",
+                "consequences": "Irritation",
+                "likelihood": 4.74,
+                "mitigation_technique": "t3h4m.html",
+                "riskId": "T-34",
+                "severity": 1.66
+            },
+            "Contact with wet cement0": {
+                "Description": "t6h1d.html",
+                "Measured_Risk": 14.08,
+                "Risk_Rank": "10th",
+                "Risk_Response": "t6h1r.html",
+                "consequences": "Causes damages to skin, tissues and lungs",
+                "likelihood": 4.6,
+                "mitigation_technique": "t6h1m.html",
+                "riskId": "T-61",
+                "severity": 3.06
+            },
+            "Improper use of PPE0": {
+                "Description": "t6h2d.html",
+                "Measured_Risk": 11.49,
+                "Risk_Rank": "18th",
+                "Risk_Response": "t6h2r.html",
+                "consequences": "Peeling of skin, inflation",
+                "likelihood": 4.56,
+                "mitigation_technique": "t6h2m.html",
+                "riskId": "T-62",
+                "severity": 2.52
+            },
+            "Inadequate maintenance": {
+                "Description": "t13h2d.html",
+                "Measured_Risk": 14.94,
+                "Risk_Rank": "8th",
+                "Risk_Response": "t13h2r.html",
+                "consequences": "Breaking of rope",
+                "likelihood": 3.67,
+                "mitigation_technique": "t13h2m.html",
+                "riskId": "T-132",
+                "severity": 4.07
+            },
+            "Overhead power lines": {
+                "Description": "t13h1d.html",
+                "Measured_Risk": 18.15,
+                "Risk_Rank": "3rd",
+                "Risk_Response": "t13h1r.html",
+                "consequences": "Ventricular fibrillation, burns",
+                "likelihood": 4.07,
+                "mitigation_technique": "t13h1m.html",
+                "riskId": "T-131",
+                "severity": 4.46
+            },
+            "Unskilled operation0": {
+                "Description": "t13h3d.html",
+                "Measured_Risk": 9.13,
+                "Risk_Rank": "31st",
+                "Risk_Response": "t13h3r.html",
+                "consequences": "Collisions with workers and materials",
+                "likelihood": 2.21,
+                "mitigation_technique": "t13h3m.html",
+                "riskId": "T-133",
+                "severity": 4.13
+            },
+            "Dust and airborne particles": {
+                "Description": "t8h1d.html",
+                "Measured_Risk": 8.75,
+                "Risk_Rank": "34th",
+                "Risk_Response": "t8h1r.html",
+                "consequences": "Asthma, coughing, sneezing",
+                "likelihood": 4.44,
+                "mitigation_technique": "t8h1m.html",
+                "riskId": "T-81",
+                "severity": 1.97
+            },
+            "Electrical": {
+                "Description": "t8h2d.html",
+                "Measured_Risk": 5.14,
+                "Risk_Rank": "41st",
+                "Risk_Response": "t8h2r.html",
+                "consequences": "Ventricular fibrillation, burns",
+                "likelihood": 1.54,
+                "mitigation_technique": "t8h2m.html",
+                "riskId": "T-82",
+                "severity": 3.34
+            },
+            "Noise1": {
+                "Description": "t4h3d.html",
+                "Measured_Risk": 11.02,
+                "Risk_Rank": "24th",
+                "Risk_Response": "t8h3r.html",
+                "consequences": "Irritation, deafness",
+                "likelihood": 4.69,
+                "mitigation_technique": "t8h3m.html",
+                "riskId": "T-83",
+                "severity": 2.35
+            },
+            "Cave Ins": {
+                "Description": "t1h1d.html",
+                "Measured_Risk": 8.99,
+                "Risk_Rank": "33nd",
+                "Risk_Response": "t1h1r.html",
+                "consequences": "Fractures, Pain",
+                "likelihood": 2.91,
+                "mitigation_technique": "t1h1m.html",
+                "riskId": "T-11",
+                "severity": 3.09
+            },
+            "Falls into excavation": {
+                "Description": "t1h3d.html",
+                "Measured_Risk": 11.44,
+                "Risk_Rank": "19th",
+                "Risk_Response": "t1h3r.html",
+                "consequences": "Sprains, strains, fractures",
+                "likelihood": 2.89,
+                "mitigation_technique": "t1h3m.html",
+                "riskId": "T-13",
+                "severity": 3.96
+            },
+            "Ground water seepage": {
+                "Description": "t1h4d.html",
+                "Measured_Risk": 6.97,
+                "Risk_Rank": "39th",
+                "Risk_Response": "t1h4r.html",
+                "consequences": "Minor injuries",
+                "likelihood": 4.41,
+                "mitigation_technique": "t1h4m.html",
+                "riskId": "T-14",
+                "severity": 1.58
+            },
+            "Underground utilities": {
+                "Description": "t1h2d.html",
+                "Measured_Risk": 12.15,
+                "Risk_Rank": "15th",
+                "Risk_Response": "t1h2r.html",
+                "consequences": "Ventricular fibrillation, burns",
+                "likelihood": 3.31,
+                "mitigation_technique": "t1h2m.html",
+                "riskId": "T-12",
+                "severity": 3.67
+            },
+            "Collapse of formwork": {
+                "Description": "t4h1d.html",
+                "Measured_Risk": 15.57,
+                "Risk_Rank": "7th",
+                "Risk_Response": "t4h1r.html",
+                "consequences": "Spinal cord damage, Fatality",
+                "likelihood": 3.46,
+                "mitigation_technique": "t4h1m.html",
+                "riskId": "T-41",
+                "severity": 4.5
+            },
+            "Fall from height0": {
+                "Description": "t4h2d.html",
+                "Measured_Risk": 20.42,
+                "Risk_Rank": "1st",
+                "Risk_Response": "t4h2r.html",
+                "consequences": "Spinal cord damage, Fatality",
+                "likelihood": 4.29,
+                "mitigation_technique": "t4h2m.html",
+                "riskId": "T-42",
+                "severity": 4.76
+            },
+            "Struck by falling object": {
+                "Description": "t4h3d.html",
+                "Measured_Risk": 13.59,
+                "Risk_Rank": "12nd",
+                "Risk_Response": "t4h3r.html",
+                "consequences": "Bruises, lacerations",
+                "likelihood": 3.22,
+                "mitigation_technique": "t4h3m.html",
+                "riskId": "T-43",
+                "severity": 4.22
+            },
+            "Fall from height1": {
+                "Description": "t7h1d.html",
+                "Measured_Risk": 13.23,
+                "Risk_Rank": "13th",
+                "Risk_Response": "t7h1r.html",
+                "consequences": "Pain, Bruises, Lacerations, Fatality",
+                "likelihood": 3.49,
+                "mitigation_technique": "t7h1m.html",
+                "riskId": "T-71",
+                "severity": 3.79
+            },
+            "Fall of objects0": {
+                "Description": "t7h2d.html",
+                "Measured_Risk": 11.62,
+                "Risk_Rank": "17th",
+                "Risk_Response": "t7h2r.html",
+                "consequences": "Multiple injuries",
+                "likelihood": 3.15,
+                "mitigation_technique": "t7h2m.html",
+                "riskId": "T-72",
+                "severity": 3.69
+            },
+            "Fire Hazards": {
+                "Description": "t5h1d.html",
+                "Measured_Risk": 11.13,
+                "Risk_Rank": "21st",
+                "Risk_Response": "t5h1r.html",
+                "consequences": "Ventricular fibrillation , burns",
+                "likelihood": 2.65,
+                "mitigation_technique": "t5h1m.html",
+                "riskId": "T-51",
+                "severity": 4.2
+            },
+            "Improper use of PPE1": {
+                "Description": "t5h2d.html",
+                "Measured_Risk": 11.16,
+                "Risk_Rank": "22nd",
+                "Risk_Response": "t5h2r.html",
+                "consequences": "Burns, inflation",
+                "likelihood": 3.34,
+                "mitigation_technique": "t5h2m.html",
+                "riskId": "T-52",
+                "severity": 3.34
+            },
+            "Chemical Exposure0": {
+                "Description": "t10h2d.html",
+                "Measured_Risk": 11.26,
+                "Risk_Rank": "20th",
+                "Risk_Response": "t10h2r.html",
+                "consequences": "damages to skin, tissues",
+                "likelihood": 4.28,
+                "mitigation_technique": "t10h2m.html",
+                "riskId": "T-102",
+                "severity": 2.63
+            },
+            "Fall from height2": {
+                "Description": "t10h1d.html",
+                "Measured_Risk": 12.01,
+                "Risk_Rank": "16th",
+                "Risk_Response": "t10h1r.html",
+                "consequences": "Pain ,fracture",
+                "likelihood": 3.01,
+                "mitigation_technique": "t10h1m.html",
+                "riskId": "T-101",
+                "severity": 3.99
+            },
+            "Fall from height3": {
+                "Description": "t2h3d.html",
+                "Measured_Risk": 17.96,
+                "Risk_Rank": "4th",
+                "Risk_Response": "t2h3r.html",
+                "consequences": "Spinal cord damage, Fatality",
+                "likelihood": 4.1,
+                "mitigation_technique": "t2h3m.html",
+                "riskId": "T-23",
+                "severity": 4.38
+            },
+            "Manual handling": {
+                "Description": "t2h1d.html",
+                "Measured_Risk": 10.86,
+                "Risk_Rank": "25th",
+                "Risk_Response": "t2h1r.html",
+                "consequences": "Crush in",
+                "likelihood": 3.81,
+                "mitigation_technique": "t2h1m.html",
+                "riskId": "T-21",
+                "severity": 2.85
+            },
+            "Struck by steel bars": {
+                "Description": "t2h2d.html",
+                "Measured_Risk": 12.35,
+                "Risk_Rank": "14th",
+                "Risk_Response": "t2h2r.html",
+                "consequences": "Cuts, Lacerations",
+                "likelihood": 3.48,
+                "mitigation_technique": "t2h2m.html",
+                "riskId": "T-22",
+                "severity": 3.55
+            },
+            "Collapse of scaffold": {
+                "Description": "t9h2d.html",
+                "Measured_Risk": 13.62,
+                "Risk_Rank": "11st",
+                "Risk_Response": "t9h2r.html",
+                "consequences": "Spinal cord damage, Fatality",
+                "likelihood": 3.25,
+                "mitigation_technique": "t9h2m.html",
+                "riskId": "T-92",
+                "severity": 4.19
+            },
+            "Fall from height4": {
+                "Description": "t9h1d.html",
+                "Measured_Risk": 16.98,
+                "Risk_Rank": "5th",
+                "Risk_Response": "t9h1r.html",
+                "consequences": "Spinal cord damage, fatality",
+                "likelihood": 3.7,
+                "mitigation_technique": "t9h1m.html",
+                "riskId": "T-91",
+                "severity": 4.59
+            },
+            "Fall of objects1": {
+                "Description": "t9h3d.html",
+                "Measured_Risk": 20.24,
+                "Risk_Rank": "2nd",
+                "Risk_Response": "t9h3r.html",
+                "consequences": "Multiple injuries",
+                "likelihood": 4.28,
+                "mitigation_technique": "t9h3m.html",
+                "riskId": "T-93",
+                "severity": 4.73
+            },
+            "Chemical Exposure1": {
+                "Description": "t12h2d.html",
+                "Measured_Risk": 6.11,
+                "Risk_Rank": "40th",
+                "Risk_Response": "t12h2r.html",
+                "consequences": "Causes damages to skin, tissues",
+                "likelihood": 2.69,
+                "mitigation_technique": "t12h2m.html",
+                "riskId": "T-122",
+                "severity": 2.27
+            },
+            "Fall from height5": {
+                "Description": "t12h3d.html",
+                "Measured_Risk": 9.31,
+                "Risk_Rank": "30th",
+                "Risk_Response": "t12h3r.html",
+                "consequences": "Spinal cord damage, fatality",
+                "likelihood": 2.69,
+                "mitigation_technique": "t12h3m.html",
+                "riskId": "T-123",
+                "severity": 3.77
+            },
+            "Tools and Equipment1": {
+                "Description": "t12h1d.html",
+                "Measured_Risk": 8.35,
+                "Risk_Rank": "36th",
+                "Risk_Response": "t12h1r.html",
+                "consequences": "cuts, lacerations, amputations",
+                "likelihood": 2.88,
+                "mitigation_technique": "t12h1m.html",
+                "riskId": "T-121",
+                "severity": 2.9
+            },
+            "Access improperly0": {
+                "Description": "t14h1d.html",
+                "Measured_Risk": 7.82,
+                "Risk_Rank": "38th",
+                "Risk_Response": "t14h1r.html",
+                "consequences": "Overturning",
+                "likelihood": 2.58,
+                "mitigation_technique": "t14h1m.html",
+                "riskId": "T-141",
+                "severity": 3.03
+            },
+            "Unskilled operation1": {
+                "Description": "t14h2d.html",
+                "Measured_Risk": 8.4,
+                "Risk_Rank": "35th",
+                "Risk_Response": "t14h2r.html",
+                "consequences": "Collisions with workers and materials",
+                "likelihood": 2.29,
+                "mitigation_technique": "t14h2m.html",
+                "riskId": "T-142",
+                "severity": 3.67
+            },
+            "Access improperly1": {
+                "Description": "t14h1d.html",
+                "Measured_Risk": 7.82,
+                "Risk_Rank": "38th",
+                "Risk_Response": "t14h1r.html",
+                "consequences": "Overturning",
+                "likelihood": 2.58,
+                "mitigation_technique": "t14h1m.html",
+                "riskId": "T-141",
+                "severity": 3.03
+            },
+            "Unskilled operation2": {
+                "Description": "t14h2d.html",
+                "Measured_Risk": 8.4,
+                "Risk_Rank": "35th",
+                "Risk_Response": "t14h2r.html",
+                "consequences": "Collisions with workers and materials",
+                "likelihood": 2.29,
+                "mitigation_technique": "t14h2m.html",
+                "riskId": "T-142",
+                "severity": 3.67
+            },
+            "Contact with wet cement1": {
+                "Description": "t11h2d.html",
+                "Measured_Risk": 10.08,
+                "Risk_Rank": "29th",
+                "Risk_Response": "t11h2r.html",
+                "consequences": "Causes damages to skin, tissues and lungs",
+                "likelihood": 4.2,
+                "mitigation_technique": "t11h2m.html",
+                "riskId": "T-112",
+                "severity": 2.4
+            },
+            "Fall from height6": {
+                "Description": "t11h1d.html",
+                "Measured_Risk": 9.05,
+                "Risk_Rank": "32nd",
+                "Risk_Response": "t11h1r.html",
+                "consequences": "Pain ,fracture",
+                "likelihood": 2.83,
+                "mitigation_technique": "t11h1m.html",
+                "riskId": "T-111",
+                "severity": 321
+            },
+            "Manual lifting and handling1": {
+                "Description": "t11h3d.html",
+                "Measured_Risk": 10.42,
+                "Risk_Rank": "18th",
+                "Risk_Response": "t11h3r.html",
+                "consequences": "Immediate injuries",
+                "likelihood": 4.04,
+                "mitigation_technique": "t11h3m.html",
+                "riskId": "T-113",
+                "severity": 2.58
+            }
+        };
+        set(hazard, hazardData);
     </script>
     <script>
         document.getElementById('searchInput').addEventListener('keypress', function (event) {
@@ -264,6 +1069,15 @@
                 window.location.href = 'slab.html';
             } else if (searchInput.includes('column') || searchInput.includes('pillar') || searchInput.includes('short column')) {
                 window.location.href = 'column.html';
+            }
+            else if (searchInput.includes('wall') || searchInput.includes('walls') || searchInput.includes('wall constraction')) {
+                window.location.href = 'wall.html';
+            }
+            else if (searchInput.includes('beam') || searchInput.includes('grade beam') || searchInput.includes('roof beam')) {
+                window.location.href = 'beam.html';
+            }
+            else if (searchInput.includes('footing') || searchInput.includes('shallow foundation') || searchInput.includes('shallow')) {
+                window.location.href = 'footing.html';
             }
             else if (searchInput.includes('excavation') || searchInput.includes('digging') || searchInput.includes('excavate') || searchInput.includes('dig')) {
 
@@ -361,6 +1175,11 @@
                 const dataRef = 'all';
                 window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
             }
+            else if (searchInput.includes('hazard') || searchInput.includes('hazards')) {
+
+                const dataRef = searchInput;
+                window.location.href = `hazard.html?dataRef=${encodeURIComponent(dataRef)}`;
+            }
             else {
                 alert('No matching results found.');
             }
@@ -378,8 +1197,10 @@
             <ul class="point-list">
                 <li>Point 1: Use the search button to find specific tasks or works on the construction site.</li>
                 <li>Point 2: Click "Description" to learn more about any hazard listed</li>
-                <li>Point 3: Click "Comments" or "Mitigation technique" for details on risk level, responses, or mitigation techniques related to a hazard.</li>
-                <li>Point 4: Clicking on hazard details opens a new page. Close it to return to the homepage or select the "Home" tab.</li>
+                <li>Point 3: Click "Comments" or "Mitigation technique" for details on risk level, responses, or
+                    mitigation techniques related to a hazard.</li>
+                <li>Point 4: Clicking on hazard details opens a new page. Close it to return to the homepage or select
+                    the "Home" tab.</li>
             </ul>
         </div>
         <div class="footer-bottom">

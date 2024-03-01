@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Column or Pillar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <!-- Logo and text -->
+        <a href="index.html" class="navbar-logo">
+            <img src="Picture1.jpg" alt="Logo">
+        </a>
+
+        <!-- Search bar -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search...">
+            <button class="search-button" onclick="handleSearch()">Search</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('searchInput').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter' && this.value.trim() !== '') {
+                handleSearch();
+            }
+        });
+        function handleSearch() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+
+            if (searchInput.includes('slab') || searchInput.includes('roof') || searchInput.includes('floor') || searchInput.includes('roof risk') || searchInput.includes('floor risk') || searchInput.includes('slab risk')) {
+                window.location.href = 'slab.html';
+            } else if (searchInput.includes('column') || searchInput.includes('pillar') || searchInput.includes('short column')) {
+                window.location.href = 'column.html';
+            }
+            else if (searchInput.includes('wall') || searchInput.includes('walls') || searchInput.includes('wall constraction')) {
+                window.location.href = 'wall.html';
+            }
+            else if (searchInput.includes('beam') || searchInput.includes('grade beam') || searchInput.includes('roof beam')) {
+                window.location.href = 'beam.html';
+            }
+            else if (searchInput.includes('footing') || searchInput.includes('shallow foundation') || searchInput.includes('shallow')) {
+                window.location.href = 'footing.html';
+            }
+            else if (searchInput.includes('excavation') || searchInput.includes('digging') || searchInput.includes('excavate') || searchInput.includes('dig')) {
+
+                const tableName = 'Excavation';
+                const dataRef = 'Excavation';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('reinforcement') || searchInput.includes('steel erection')) {
+
+                const tableName = 'Reinforcement and Steel Erection';
+                const dataRef = 'Reinforcement_Erection';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('concreate') || searchInput.includes('concrete batching') || searchInput.includes('concrete mixer') || searchInput.includes('concrete mixing')) {
+
+                const tableName = 'Concrete Mixing';
+                const dataRef = 'Concrete_mixing';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('formwork') || searchInput.includes('shuttering') || searchInput.includes('formwork and shuttering')) {
+
+                const tableName = 'Formwork and Shuttering';
+                const dataRef = 'Formwork_and_Shuttering';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('hotwork') || searchInput.includes('weld') || searchInput.includes('welding') || searchInput.includes('electrical work')) {
+
+                const tableName = 'Hotwork';
+                const dataRef = 'Hotwork';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('concrete pour') || searchInput.includes('concrete pouring') || searchInput.includes('concreting')) {
+
+                const tableName = 'Concreting';
+                const dataRef = 'Concreting';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('hoist') || searchInput.includes('hoisting') || searchInput.includes('lifting')) {
+
+                const tableName = 'Hoist';
+                const dataRef = 'Hoist';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('drilling') || searchInput.includes('boring')) {
+
+                const tableName = 'Drilling';
+                const dataRef = 'Drilling';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('scaffold') || searchInput.includes('ladder')) {
+
+                const tableName = 'Scaffold/Ladder';
+                const dataRef = 'Scaffold_Ladder';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('painting') || searchInput.includes('paint') || searchInput.includes('color') || searchInput.includes('colour') || searchInput.includes('coloring')) {
+
+                const tableName = 'Painting';
+                const dataRef = 'Painting';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('wall construction') || searchInput.includes('wall')) {
+
+                const tableName = 'Wall Construction';
+                const dataRef = 'Wall_Construction';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('tiles') || searchInput.includes('floor finishing') || searchInput.includes('tiles and floor finishing')) {
+
+                const tableName = 'Tiles and Floor Finishing';
+                const dataRef = 'Tiles_and_Floor_Finishing';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('crane') || searchInput.includes('crane operation') || searchInput.includes('crane work')) {
+
+                const tableName = 'Crane Operation';
+                const dataRef = 'Crane_Operation';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('construction vehicle') || searchInput.includes('vehicle') || searchInput.includes('excavator') || searchInput.includes('bulldozer') || searchInput.includes('loader') || searchInput.includes('truck')) {
+
+                const tableName = 'Vehicle Movement';
+                const dataRef = 'Vehicle_movement';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('carpentry work') || searchInput.includes('carpentry') || searchInput.includes('wood work') || searchInput.includes('wood')) {
+
+                const tableName = 'Carpentry Work';
+                const dataRef = 'Carpentry_work';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('all') || searchInput.includes('show all')) {
+
+                const tableName = 'All Task Show';
+                const dataRef = 'all';
+                window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else if (searchInput.includes('hazard') || searchInput.includes('hazards')) {
+
+                const dataRef = searchInput;
+                window.location.href = `hazard.html?dataRef=${encodeURIComponent(dataRef)}`;
+            }
+            else {
+                alert('No matching results found.');
+            }
+        }
+    </script>
+    <h1 id="tablehead">Hazards of Construction Safety Risks and Mitigation Techniques</h1>
+    <div id="loading-screen">
+        <p>Loading...</p>
+    </div>
+    <script type="module">
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const params = new URLSearchParams(window.location.search);
+
+            let dataRef = params.get('dataRef');
+            show_table(dataRef);
+
+        });
+        // Function to show the loading screen
+        function showLoadingScreen() {
+            document.getElementById('loading-screen').style.display = 'block';
+        }
+
+        // Function to hide the loading screen
+        function hideLoadingScreen() {
+            document.getElementById('loading-screen').style.display = 'none';
+        }
+
+        // Retrieve hazard data from Firebase and populate the tables
+        showLoadingScreen(); // Show loading screen before fetching data
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getDatabase, ref, child, onValue, get, remove, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getStorage, ref as storageRef, getDownloadURL, deleteObject, uploadBytes } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsyys0dxq7SSNxbzQ19HqjGBUdaWgfpUM",
+            authDomain: "siteriskdatabase.firebaseapp.com",
+            databaseURL: "https://siteriskdatabase-default-rtdb.firebaseio.com",
+            projectId: "siteriskdatabase",
+            storageBucket: "siteriskdatabase.appspot.com",
+            messagingSenderId: "292672879363",
+            appId: "1:292672879363:web:8fff66c20f33e2741d0736",
+            measurementId: "G-L2NFTX5RTD"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const storage = getStorage(app);
+        const db = getDatabase();
+        const hazards = ref(getDatabase(), 'hazard');
+
+        function populateTable(tableId, tableName, hazardData) {
+            const tableContainer = document.getElementById('tableContainer');
+            const table = document.createElement('table');
+            table.id = tableId;
+            const tableHeader = document.createElement('thead');
+            const tableBody = document.createElement('tbody');
+            table.appendChild(tableHeader);
+            table.appendChild(tableBody);
+
+            // Create table header with main node name as heading
+            const headerRow = document.createElement('tr');
+            const headerCell = document.createElement('th');
+            headerCell.textContent = tableName;
+            headerCell.colSpan = 10; // Set colspan to cover all columns
+            headerCell.style.backgroundColor = '#C5E0B3'; // Set background color
+            headerCell.style.fontSize = '20px';
+            headerRow.appendChild(headerCell);
+            tableHeader.appendChild(headerRow);
+            // Create table headers
+            const headerRow2 = document.createElement('tr');
+            headerRow2.innerHTML = `
+        <th>Hazards</th>
+        <th>Consequences</th>
+        <th>Description</th>
+        <th>Likelihood(L)</th>
+        <th>Severity(S)</th>
+        <th class="headerWithButton">
+    <div class="headerContent">
+        Measured Risk
+    </div>
+    <button class="sortButton">Sort</button>
+</th>
+
+        <th>Risk Rank</th>
+        <th>Risk Level and responses</th>
+        <th>Mitigation Technique</th>
+        <th>Risk Id</th>
+    `;
+            tableHeader.appendChild(headerRow2);
+
+            tableContainer.appendChild(table);
+
+            // Populate table body with hazard data
+            for (const [hazardName, hazardDetails] of Object.entries(hazardData)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+            <td>${hazardName}</td>
+            <td>${hazardDetails.consequences}</td>
+            <td><a href="${hazardDetails.Description}" target="_blank">Link</a></td>
+            <td>${hazardDetails.likelihood}</td>
+            <td>${hazardDetails.severity}</td>
+            <td>${hazardDetails.Measured_Risk}</td>
+            <td>${hazardDetails.Risk_Rank}</td>
+            <td><a href="${hazardDetails.Risk_Response}" target="_blank">Link</a></td>
+            <td><a href="${hazardDetails.mitigation_technique}" target="_blank">Link</a></td>
+            <td>${hazardDetails.riskId}</td>
+        `;
+                tableBody.appendChild(row);
+            }
+
+            // Add event listener to the sort buttons
+            const sortButtons = table.querySelectorAll('.sortButton');
+            sortButtons.forEach(button => {
+                let sortOrder = 'asc'; // Default sorting order
+                button.addEventListener('click', () => {
+                    const columnIndex = 5; // Measured Risk column index
+                    sortTable(table, columnIndex, sortOrder);
+
+                    // Toggle sorting order for the next click
+                    sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+                });
+            });
+
+        }
+
+        function sortTable(table, columnIndex, sortOrder) {
+            const tableBody = table.querySelector('tbody');
+            const rows = Array.from(tableBody.querySelectorAll('tr'));
+
+            rows.sort((a, b) => {
+                let aValue = parseFloat(a.cells[columnIndex].textContent);
+                let bValue = parseFloat(b.cells[columnIndex].textContent);
+
+                // Adjust sorting based on the sortOrder parameter
+                if (sortOrder === 'asc') {
+                    return aValue - bValue;
+                } else {
+                    return bValue - aValue;
+                }
+            });
+
+            // Remove existing rows from the table
+            rows.forEach(row => tableBody.removeChild(row));
+
+            // Re-append sorted rows to the table
+            rows.forEach(row => tableBody.appendChild(row));
+        }
+
+
+        function show_table(dataRef) {
+            onValue(hazards, (snapshot) => {
+                const hazardData = snapshot.val();
+                const filteredHazardData = {};
+                if (dataRef == 'hazard' || dataRef == 'hazards') {
+                    populateTable('concretingTable', 'Hazard Table', hazardData);
+                } else {
+                    const keyword = dataRef.split(" ")[0].toLowerCase();
+                    for (const hazardName in hazardData) {
+                        if (hazardName.toLowerCase().includes(keyword)) {
+                            filteredHazardData[hazardName] = hazardData[hazardName];
+                        }
+                    }
+                    if (Object.keys(filteredHazardData).length > 0) {
+                        populateTable('concretingTable', dataRef, filteredHazardData);
+                    } else {
+                        console.log(`No hazards found matching '${dataRef}'.`);
+                    }
+                }
+                hideLoadingScreen();
+            });
+        }
+
+
+
+    </script>
+
+    <div id="tableContainer" style="margin-left: 50px;margin-right: 50px;margin-top: 50px;"></div>
+    <div class="container">
+        <h1 style="text-align: center;color: #333;font-size: 36px;margin-bottom: 20px;text-decoration: underline;">TABLE
+        </h1>
+        <div class="row1">
+            <img src="Screenshot (664).png" alt="Photo 2">
+            <img src="Screenshot (665).png" alt="Photo 4">
+        </div>
+
+    </div>
+    <footer>
+        <div class="footer-container">
+            <!-- Title -->
+            <h2>Instructions for Use:</h2>
+
+            <!-- Points -->
+            <ul class="point-list">
+                <li>Point 1: Use the search button to find specific tasks or works on the construction site.</li>
+                <li>Point 2: Click "Description" to learn more about any hazard listed</li>
+                <li>Point 3: Click "Comments" or "Mitigation technique" for details on risk level, responses, or
+                    mitigation techniques related to a hazard.</li>
+                <li>Point 4: Clicking on hazard details opens a new page. Close it to return to the homepage or select
+                    the "Home" tab.</li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SafetyNet Builder. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

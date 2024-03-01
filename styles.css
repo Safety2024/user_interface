@@ -26,32 +26,42 @@ main {
     margin: 10px 0;
     font-size: 1.2rem;
 }
+
 #loading-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Semi-transparent white background */
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
 }
 
 #loading-screen p {
-  font-size: xx-large;
-  margin: 0; /* Remove any default margin */
-  text-align: center; /* Center text horizontally */
-  line-height: 1; /* Ensure proper vertical alignment */
-  position: absolute; /* Position the text absolutely */
-  top: 50%; /* Move the text to the vertical center */
-  left: 50%;
-  transform: translateY(-50%); /* Adjust vertically to center */
+    font-size: xx-large;
+    margin: 0;
+    /* Remove any default margin */
+    text-align: center;
+    /* Center text horizontally */
+    line-height: 1;
+    /* Ensure proper vertical alignment */
+    position: absolute;
+    /* Position the text absolutely */
+    top: 50%;
+    /* Move the text to the vertical center */
+    left: 50%;
+    transform: translateY(-50%);
+    /* Adjust vertically to center */
 }
 
-  
-  
-  
+
+
+
 
 #tablehead {
     background-color: #4CAF50;
@@ -179,7 +189,7 @@ th {
 footer {
     background-color: #4d4d4d;
     color: white;
-   padding-top: 10px;
+    padding-top: 10px;
     margin-top: auto;
     height: 250px;
 }
@@ -232,6 +242,7 @@ footer {
     margin: 0 10px;
     box-shadow: #333;
 }
+
 .row1 {
     display: flex;
     justify-content: center;
@@ -244,4 +255,35 @@ footer {
     height: 60%;
     margin: 0 10px;
     box-shadow: #333;
+}
+
+.headerWithButton {
+    display: flex;
+    align-items: center;
+    /* Align items vertically */
+}
+
+.headerContent {
+    margin-right: 5px;
+    /* Adjust spacing between text and button */
+}
+
+.sortButton {
+    padding: 5px 5px;
+    /* Add padding */
+    background-color: #4CAF50;
+    /* Green background */
+    color: white;
+    /* White text */
+    border: none;
+    /* Remove border */
+    border-radius: 4px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Add cursor on hover */
+}
+
+.sortButton:hover {
+    background-color: #45a049;
+    /* Darker green on hover */
 }
