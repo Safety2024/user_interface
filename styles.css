@@ -238,9 +238,11 @@ footer {
 
 
 .container {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 20px;
     text-align: center;
+    background-color: white;
+    border-radius: 10px;
 }
 
 .row {
@@ -265,8 +267,8 @@ footer {
 }
 
 .row1 img {
-    width: 60%;
-    height: 60%;
+    width: 40%;
+    height: 40%;
     margin: 0 10px;
     box-shadow: #333;
 }
