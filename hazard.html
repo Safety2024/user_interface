@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Column or Pillar</title>
+    <title>Hazards</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -247,8 +247,9 @@
             // Populate table body with hazard data
             for (const [hazardName, hazardDetails] of Object.entries(hazardData)) {
                 const row = document.createElement('tr');
+                const ha = isNaN(parseInt(hazardName.slice(-1))) ? hazardName : hazardName.slice(0, -1);
                 row.innerHTML = `
-            <td>${hazardName}</td>
+            <td>${ha}</td>
             <td>${hazardDetails.consequences}</td>
             <td><a href="${hazardDetails.Description}" target="_blank">Link</a></td>
             <td>${hazardDetails.likelihood}</td>
@@ -336,7 +337,15 @@
             <img src="Screenshot (664).png" alt="Photo 2">
             <img src="Screenshot (665).png" alt="Photo 4">
         </div>
-
+        <h1 style="text-align: center;color: #333;font-size: 36px;margin-bottom: 20px;text-decoration: underline;">GRAPH
+        </h1>
+        <div class="row">
+            <img src="HazardsPicture7.png" alt="Photo 2">
+            <img src="HazardsPicture8.png" alt="Photo 3">
+        </div>
+        <div class="row">
+            <img src="HazardsPicture9.png" alt="Photo 4">
+        </div>
     </div>
     <footer>
         <div class="footer-container">
@@ -346,10 +355,13 @@
                     <td class="left-column">
                         <h2>Instructions for Use:</h2>
                         <ul class="point-list">
-                            <li>Point 1: Use the search button to find specific tasks or works on the construction site.</li>
+                            <li>Point 1: Use the search button to find specific tasks or works on the construction site.
+                            </li>
                             <li>Point 2: Click "Description" to learn more about any hazard listed</li>
-                            <li>Point 3: Click "Comments" or "Mitigation technique" for details on risk level, responses, or mitigation techniques related to a hazard.</li>
-                            <li>Point 4: Clicking on hazard details opens a new page. Close it to return to the homepage or select the "Home" tab.</li>
+                            <li>Point 3: Click "Comments" or "Mitigation technique" for details on risk level,
+                                responses, or mitigation techniques related to a hazard.</li>
+                            <li>Point 4: Clicking on hazard details opens a new page. Close it to return to the homepage
+                                or select the "Home" tab.</li>
                         </ul>
                     </td>
                     <td class="right-column">
