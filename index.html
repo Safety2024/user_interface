@@ -1169,17 +1169,18 @@
                 const dataRef = 'Carpentry_work';
                 window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
             }
+            else if (searchInput.includes('hazard') || searchInput.includes('hazards') || searchInput.includes('risk') || searchInput.includes('building risk') || searchInput.includes('building risks') || searchInput == 'all risk' || searchInput == 'all risks') {
+
+                const dataRef = searchInput;
+                window.location.href = `hazard.html?dataRef=${encodeURIComponent(dataRef)}`;
+            }
             else if (searchInput.includes('all') || searchInput.includes('show all')) {
 
                 const tableName = 'All Task Show';
                 const dataRef = 'all';
                 window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
             }
-            else if (searchInput.includes('hazard') || searchInput.includes('hazards')) {
 
-                const dataRef = searchInput;
-                window.location.href = `hazard.html?dataRef=${encodeURIComponent(dataRef)}`;
-            }
             else {
                 alert('No matching results found.');
             }

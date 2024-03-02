@@ -134,16 +134,16 @@
                 const dataRef = 'Carpentry_work';
                 window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
             }
+            else if (searchInput.includes('hazard') || searchInput.includes('hazards') || searchInput.includes('risk') || searchInput.includes('building risk') || searchInput.includes('building risks') || searchInput == 'all risk' || searchInput == 'all risks') {
+
+                const dataRef = searchInput;
+                window.location.href = `hazard.html?dataRef=${encodeURIComponent(dataRef)}`;
+            }
             else if (searchInput.includes('all') || searchInput.includes('show all')) {
 
                 const tableName = 'All Task Show';
                 const dataRef = 'all';
                 window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
-            }
-            else if (searchInput.includes('hazard') || searchInput.includes('hazards')) {
-
-                const dataRef = searchInput;
-                window.location.href = `hazard.html?dataRef=${encodeURIComponent(dataRef)}`;
             }
             else {
                 alert('No matching results found.');
@@ -330,13 +330,15 @@
     </script>
 
     <div id="tableContainer" style="margin-left: 50px;margin-right: 50px;margin-top: 50px;"></div>
-    <div class="container">
+    <div class="container1">
         <h1 style="text-align: center;color: #333;font-size: 36px;margin-bottom: 20px;text-decoration: underline;">TABLE
         </h1>
         <div class="row1">
             <img src="Screenshot (664).png" alt="Photo 2">
             <img src="Screenshot (665).png" alt="Photo 4">
         </div>
+    </div>
+    <div class="container">
         <h1 style="text-align: center;color: #333;font-size: 36px;margin-bottom: 20px;text-decoration: underline;">GRAPH
         </h1>
         <div class="row">

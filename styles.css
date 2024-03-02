@@ -238,13 +238,19 @@ footer {
 
 
 .container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+}
+.container1 {
     max-width: 100%;
     margin: 20px;
     text-align: center;
     background-color: white;
     border-radius: 10px;
 }
-
 .row {
     display: flex;
     justify-content: center;

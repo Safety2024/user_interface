@@ -125,6 +125,11 @@
                 const dataRef = 'Carpentry_work';
                 window.location.href = `tableshow.html?tableName=${encodeURIComponent(tableName)}&dataRef=${encodeURIComponent(dataRef)}`;
             }
+            else if (searchInput.includes('hazard') || searchInput.includes('hazards') || searchInput.includes('risk') || searchInput.includes('building risk') || searchInput.includes('building risks') || searchInput == 'all risk' || searchInput == 'all risks') {
+
+                const dataRef = searchInput;
+                window.location.href = `hazard.html?dataRef=${encodeURIComponent(dataRef)}`;
+            }
             else if (searchInput.includes('all') || searchInput.includes('show all')) {
 
                 const tableName = 'All Task Show';
@@ -315,7 +320,7 @@
     </script>
 
     <div id="tableContainer" style="margin-left: 50px;margin-right: 50px;margin-top: 50px;"></div>
-    <div class="container">
+    <div class="container1">
         <h1 style="text-align: center;color: #333;font-size: 36px;margin-bottom: 20px;text-decoration: underline;">TABLE
         </h1>
         <div class="row1">
@@ -343,10 +348,13 @@
                     <td class="left-column">
                         <h2>Instructions for Use:</h2>
                         <ul class="point-list">
-                            <li>Point 1: Use the search button to find specific tasks or works on the construction site.</li>
+                            <li>Point 1: Use the search button to find specific tasks or works on the construction site.
+                            </li>
                             <li>Point 2: Click "Description" to learn more about any hazard listed</li>
-                            <li>Point 3: Click "Comments" or "Mitigation technique" for details on risk level, responses, or mitigation techniques related to a hazard.</li>
-                            <li>Point 4: Clicking on hazard details opens a new page. Close it to return to the homepage or select the "Home" tab.</li>
+                            <li>Point 3: Click "Comments" or "Mitigation technique" for details on risk level,
+                                responses, or mitigation techniques related to a hazard.</li>
+                            <li>Point 4: Clicking on hazard details opens a new page. Close it to return to the homepage
+                                or select the "Home" tab.</li>
                         </ul>
                     </td>
                     <td class="right-column">
